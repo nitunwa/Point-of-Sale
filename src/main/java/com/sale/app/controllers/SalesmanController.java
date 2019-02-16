@@ -19,37 +19,54 @@ public class SalesmanController {
 
 	@Autowired
 	private SalesmanDao salesmanDao;
-	
-	@RequestMapping(value="/createSalesman",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/createSalesman", method = RequestMethod.GET)
 	public String createUser(Model model) {
+		getAllSalesman(model);
 		return "salesman/createSalesman";
 	}
 
-	@RequestMapping(value="/createSalesman", method=RequestMethod.POST)
-	public String createSalesman(@RequestParam(value="salesmanName")String salesmanName,@RequestParam(value="password")String password){
-		try{
+	private void getAllSalesman(Model model) {
+		List<Salesman> salesmanList = salesmanDao.getAllSalesman();
+		model.addAttribute("salesmanList", salesmanList);
+		System.out.println("all salesman list");
+	}
+
+	@RequestMapping(value = "/createSalesman", method = RequestMethod.POST)
+	public String createSalesman(Model model, @RequestParam(value = "salesmanName") String salesmanName,
+			@RequestParam(value = "password") String password) {
+		try {
 			System.out.println("before create a salesman");
-			Salesman salesman = new Salesman(salesmanName,password);
-			
-			if(salesmanName.equals("")||password.equals("")){
+			Salesman salesman = new Salesman(salesmanName, password);
+
+			if (salesmanName.equals("") || password.equals("")) {
 				throw new Exception("Requied field is missing");
 			}
 			salesmanDao.createSalesman(salesman);
 			System.out.println("After create a salesman");
-				
-		}
-		catch(Exception ex){
+			getAllSalesman(model);
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
-			return"/salesman/createSalesman";
+			return "/salesman/createSalesman";
 		}
-		
-		return "redirect:/salesman/salesmanListReport";
+
+		return "/salesman/createSalesman";
 	}
-	@RequestMapping(value="/salesmanListReport")
-	public String getAllsalesmanList(Model model){
-		List<Salesman> salesmanList= salesmanDao.getAllSalesman();
-		model.addAttribute("salesmanList", salesmanList);
-		return "/salesman/salesmanListReport";
+
+	@RequestMapping(value = "/deleteById")
+	public String deleteById(Model model, @RequestParam(value = "id") Long id) {
+		System.out.println("delete a salesman");
+		try {
+			Salesman salesman = new Salesman(id);
+			salesmanDao.delete(salesman);
+			System.out.println("delete successful");
+			getAllSalesman(model);
+
+		} catch (Exception ex) {
+			return "Error deleting salesman" + ex.toString();
+		}
+		return "/salesman/createSalesman";
 	}
 
 }

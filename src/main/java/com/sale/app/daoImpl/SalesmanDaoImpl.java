@@ -33,6 +33,14 @@ public class SalesmanDaoImpl implements SalesmanDao {
 		
 	}
 
+	@Override
+	public void delete(Salesman salesman) {
+		
+		Salesman user =entityManager.find(Salesman.class, salesman.getId());
+		entityManager.remove(user);
+		System.out.println("delete a salesman from dao");
+	}
+
 	
 
 }

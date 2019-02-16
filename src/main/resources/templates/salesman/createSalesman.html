@@ -71,7 +71,46 @@
   
   <button type="submit" class="btn btn-primary"  >Save</button>
    <a class="btn  btn-default" th:href="@{/main}" >Cancel</a>
+   
+   <div>
+  <br/>
+  </div>
+  <div class="container theme-showcase">
+
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="table table-bordered">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Password</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="salesman,iterationStatus  : ${salesmanList}">
+
+								<td th:text="${salesman.id}">id</td>
+								<td th:text="${salesman.salesmanName}">name</td>
+
+								<td th:text="${salesman.password}">password</td>
+
+
+
+								<td><a th:href="@{/salesman/deleteById(id=${salesman.id})}">Delete</a>
+								</td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
+			</div>
+		</div>
+	</div>
   </form>
+
     </div> <!-- /container -->
    
     <!-- Bootstrap core JavaScript
