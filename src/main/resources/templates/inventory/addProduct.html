@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>Theme Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+
+<!-- Bootstrap theme -->
+
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"
+	media="screen" />
+
+<!-- Custom styles for this template -->
+
+
+<link href="../static/css/theme.css" th:href="@{/css/theme.css}"
+	rel="stylesheet" media="screen" />
+
+</head>
+
+<body>
+
+	<!-- Fixed navbar -->
+
+	<div class="container">
+
+		<form th:action="@{/product/addProduct}" method="post" autocomplete="off" style="max-width: 250px">
+			<div class="form-group">
+				<h4>Enter product Details</h4><br /> 
+				<label for="exampleInputName1"> Product Name</label>
+				<input type="text" name="productName" class="form-control"
+					id="exampleInputName" placeholder="Product Name"> 
+					
+				<input type="hidden" name="id" class="form-control" id="exampleInputId"
+					aria-describedby="idlHelp" placeholder="id" /><br/>
+					
+				
+			</div>
+
+			
+			<button type="submit" class="btn btn-primary">Save</button>
+			<a class="btn  btn-default" th:href="@{/}">Cancel</a><br/><br/>
+			
+			<div class="container theme-showcase">
+
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="table table-bordered">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product Name</th>
+								<th>Date</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product,iterationStatus  : ${productList}">
+
+								<td th:text="${product.productId}">id</td>
+								<td th:text="${product.productName}">name</td>
+
+								<td th:text="${product.currentDate}">date</td>
+								
+
+
+								<td><a th:href="@{/product/deleteById(productId=${product.productId})}">Delete</a>
+								</td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
+			</div>
+		</div>
+	</div>
+		</form>
+	</div>
+	<!-- /container -->
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<script src="../static/js/bootstrap.min.js"
+		th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

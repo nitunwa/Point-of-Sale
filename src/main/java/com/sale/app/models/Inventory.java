@@ -22,30 +22,31 @@ public class Inventory {
 	private Long inventoryId;
 
 	@NotNull
-	private String inventoryName;
-
-	@NotNull
 	private int quantity;
 
 	@NotNull
 	private double price;
-	
+
 	@NotNull
 	private int batchNum;
 
 	@NotNull
 	private double total;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory", fetch = FetchType.LAZY)
 	private List<Sale> salesList;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplier_Id")
 	private Supplier supplier;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "salesman_Id")
 	private Salesman salesman;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_Id")
+	private Product product;
 
 	public Long getInventoryId() {
 		return inventoryId;
@@ -69,14 +70,6 @@ public class Inventory {
 
 	public void setInventoryId(Long inventoryId) {
 		this.inventoryId = inventoryId;
-	}
-
-	public String getInventoryName() {
-		return inventoryName;
-	}
-
-	public void setInventoryName(String inventoryName) {
-		this.inventoryName = inventoryName;
 	}
 
 	public int getQuantity() {
@@ -110,7 +103,5 @@ public class Inventory {
 	public void setSalesList(List<Sale> salesList) {
 		this.salesList = salesList;
 	}
-	
-	
 
 }

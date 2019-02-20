@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.sale.app.dao.InventoryDao;
 import com.sale.app.models.Inventory;
 
-/*@Repository
+@Repository
 @Transactional
 public class InventoryDaoImpl implements InventoryDao {
 
@@ -22,4 +22,4 @@ public class InventoryDaoImpl implements InventoryDao {
 		entityManager.persist(inventory);
 	}
 
-}*/
+}

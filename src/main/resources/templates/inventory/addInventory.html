@@ -39,16 +39,15 @@
   <div class="form-group">
   <h4>Enter Inventory Details</h4><br/>
   
-    <label for="exampleInputName1">Select Product</label>
-     <select name="Product">
-    	<option value="Fiction">Fiction Book</option>
-    	<option value="Non Fiction">Non-Fiction Book</option>
-    	<option value="Pencil">Pencil</option>
-    	<option value="Color Pencil">Color Pencil</option>
-    	<option value="Pen">Pen</option>
-    	<option value="Crayon">Crayon</option>
-    	<option value="Water">Water</option>
+ 
+  <select class="form-control" id="productName" name="productName">
+        <option value="">Select Product</option>
+        <option th:each="product : ${productList}"
+                th:value="${product.productId}"
+                th:text="${product.productName}"></option>
     </select>
+  
+    
     <!--  <input type="text" name="bookName"  class="form-control" id="exampleInputName" aria-describedby="namelHelp" placeholder="bookName">-->
     <input type="hidden" name="id"   class="form-control" id="exampleInputId" aria-describedby="idlHelp" placeholder="id" />
   </div>
@@ -58,6 +57,11 @@
     <input type="text" name="quantity"  class="form-control" id="exampleInputQuantity" aria-describedby="namelHelp" placeholder="Quantity">
     
    </div>
+   <div class="form-group">
+    <label for="exampleInputName1">Price</label>
+    <input type="text" name="price"  class="form-control" id="exampleInputPrice" aria-describedby="namelHelp" placeholder="Price">
+    
+  </div>
   
    
   <div class="form-group">
@@ -65,18 +69,51 @@
     <input type="text" name="batchNum"  class="form-control" id="exampleInputBatchNum" aria-describedby="namelHelp" placeholder="BatchNum">
     
   </div>
-  
   <div class="form-group">
-    <label for="exampleInputName1">Price</label>
-    <input type="text" name="price"  class="form-control" id="exampleInputPrice" aria-describedby="namelHelp" placeholder="Price">
+    <label for="examplesupplierName">Supplier Name</label>
+    <input type="text" name="supplierName"  class="form-control" id="exampleInputsupplierName" aria-describedby="namelHelp" placeholder="Supplier Name">
     
   </div>
   
- 
-
-    
-  <button type="submit" class="btn btn-primary"  >Save</button>
+  
+  
+<button type="submit" class="btn btn-primary"  >Save</button>
    <a class="btn  btn-default" th:href="@{/}" >Cancel</a>
+   <div class="container theme-showcase">
+
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="table table-bordered">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product Name</th>
+								<th>Date</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product,iterationStatus  : ${productList}">
+
+								<td th:text="${product.productId}">id</td>
+								<td th:text="${product.productName}">name</td>
+
+								<td th:text="${product.currentDate}">date</td>
+								
+
+
+								<td><a th:href="@{/product/deleteById(productId=${product.productId})}">Delete</a>
+								</td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
+			</div>
+		</div>
+	</div>
   </form>
     </div> <!-- /container -->
    
