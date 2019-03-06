@@ -15,25 +15,30 @@ import com.sale.app.models.Product;
 @Transactional
 public class ProductDaoImpl implements ProductDao {
 	@PersistenceContext
-	private EntityManager eEntityManager;
+	private EntityManager entityManager;
 
 	@Override
 	public void addProduct(Product product) {
 		System.out.println("Adding product");
-		eEntityManager.persist(product);
+		entityManager.persist(product);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> getAllProduct() {
-		return eEntityManager.createQuery("from Product").getResultList();
+		return entityManager.createQuery("from Product").getResultList();
 	}
 
-	
 	@Override
 	public void delete(Product product) {
-		Product productfromDb =eEntityManager.find(Product.class, product.getProductId());
-		eEntityManager.remove(productfromDb);
+		Product productfromDb = entityManager.find(Product.class, product.getProductId());
+		entityManager.remove(productfromDb);
+	}
+
+	@Override
+	public Product getProduct(Long productId) {
+		Product productfrDb = entityManager.find(Product.class, productId);
+		return productfrDb;
 	}
 
 }

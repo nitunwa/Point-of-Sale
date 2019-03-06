@@ -26,17 +26,22 @@ public class Sale {
 
 	@NotNull
 	private double price;
-	
+
 	@NotNull
 	private Date currentDate = new Date();
-	
+	@NotNull
+	private double total;
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "salesman_Id")
 	private Salesman salesman;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "inventory_Id")
 	private Inventory inventory;
+
+	public Sale() {
+	}
 
 	public Long getSaleId() {
 		return saleId;
@@ -85,7 +90,13 @@ public class Sale {
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
-	
-	
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 
 }

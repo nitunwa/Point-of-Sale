@@ -41,6 +41,18 @@ public class SalesmanDaoImpl implements SalesmanDao {
 		System.out.println("delete a salesman from dao");
 	}
 
+	@Override
+	public Salesman getSalesman(Long id) {
+		Salesman salesman = entityManager.find(Salesman.class, id);
+		return salesman;
+	}
+
+	@Override
+	public Salesman getByEmail(String email) {
+		Salesman salesmanDb = (Salesman) entityManager.createQuery("from Salesman where email= :Email").setParameter("Email", email).getSingleResult();
+		return salesmanDb;
+	}
+
 	
 
 }

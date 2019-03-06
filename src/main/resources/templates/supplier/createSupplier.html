@@ -52,68 +52,41 @@
     
 <div class="container">
 
-    <form th:action="@{/salesman/createSalesman}" method="post" autocomplete="off">
+    <form th:action="@{/supplier/createSupplier}" method="post" autocomplete="off">
   <div class="form-group">
  
-    <label for="exampleInputName1">Name</label>
-    <input type="text" name="salesmanName"  class="form-control" id="exampleNameId"  placeholder="Salesman Name" style ="max-width:250px" >
-    <input type="hidden" name="id"   class="form-control" id="exampleInputId"  placeholder="id" />
+    <label for="exampleInputName1">Supplier Name</label>
+    <input type="text" name="name"  class="form-control" id="exampleNameId"  placeholder="Supplier Name" style ="max-width:250px" >
+    
+    <input type="hidden" name="id"   class="form-control" id="exampleInputId"  placeholder="id" /><br/>
+    
+    <label for="exampleInputEmail">Email</label>
+    <input type="text" name="email"  class="form-control" id="exampleemail"  placeholder="email" style ="max-width:250px" ><br/>
+   
+    <label for="exampleInputCompany">Company</label>
+    <input type="text" name="company"  class="form-control" id="exampleCompany"  placeholder="company" style ="max-width:250px" ><br/>
+    
+    <label for="exampleInputStreet">Street</label>
+    <input type="text" name="street"  class="form-control" id="exampleStreet"  placeholder="street" style ="max-width:250px" ><br/>
+    
+    <label for="exampleInputCity">City</label>
+    <input type="text" name="city"  class="form-control" id="exampleCity"  placeholder="City" style ="max-width:250px" ><br/>
+    
+     <label for="exampleInputState">State</label>
+    <input type="text" name="state"  class="form-control" id="exampleState"  placeholder="State" style ="max-width:250px" >
   </div>
  
-  <div class="form-group">
-    <label for="exampleInputPass">Email</label>
-    <input type="text" autocomplete="off" name="email"   class="form-control" id="email" placeholder="Email" style ="max-width:250px">
-  </div>
   
-  <div class="form-group">
-    <label for="exampleInputPass">Password</label>
-    <input type="password" autocomplete="off" name="password"   class="form-control" id="passId" placeholder="Password" style ="max-width:250px">
-  </div>
+  
+  
   
   
   
   <button type="submit" class="btn btn-primary"  >Save</button>
    <a class="btn  btn-default" th:href="@{/main}" >Cancel</a>
    
-   <div>
-  <br/>
-  </div>
-  <div class="container theme-showcase">
-
-		<div class="row">
-
-			<div class="col-md-6">
-				<div class="table table-bordered">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Name</th>
-								<th>Email</th>
-								<th>Password</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="salesman,iterationStatus  : ${salesmanList}">
-
-								<td th:text="${salesman.id}">id</td>
-								<td th:text="${salesman.salesmanName}">name</td>
-
-								<td th:text="${salesman.email}">email</td>
-								<td th:text="${salesman.password}">password</td>
-
-
-
-								<td><a th:href="@{/salesman/deleteById(id=${salesman.id})}">Delete</a>
-								</td> 
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
-			</div>
-		</div>
-	</div>
+   
+ 
   </form>
 
     </div> <!-- /container -->

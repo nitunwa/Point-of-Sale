@@ -27,7 +27,9 @@ public class Salesman {
 
 	@NotNull
 	private String salesmanName;
-
+	@NotNull
+	private String email;
+	
 	@NotNull
 	private String password;
 
@@ -46,9 +48,10 @@ public class Salesman {
 		this.id = id;
 	}
 
-	public Salesman(String salesmanName, String password) {
+	public Salesman(String salesmanName,String email, String password) {
 		super();
 		this.salesmanName = salesmanName;
+		this.email = email;
 		this.password = password;
 	}
 
@@ -66,6 +69,14 @@ public class Salesman {
 
 	public void setSalesmanName(String salesmanName) {
 		this.salesmanName = salesmanName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

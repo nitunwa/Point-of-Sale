@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 public class Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long inventoryId;
+	private Long id;
 
 	@NotNull
 	private int quantity;
@@ -31,7 +31,7 @@ public class Inventory {
 	private int batchNum;
 
 	@NotNull
-	private double total;
+	private String sku;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory", fetch = FetchType.LAZY)
 	private List<Sale> salesList;
@@ -48,8 +48,25 @@ public class Inventory {
 	@JoinColumn(name = "product_Id")
 	private Product product;
 
-	public Long getInventoryId() {
-		return inventoryId;
+	public Inventory() {
+	}
+
+	public Inventory(Product product, int quantity, double price, int batchNum,  Supplier supplier,
+			Salesman salesman,String sku) {
+		super();
+		this.product = product;
+		this.quantity = quantity;
+		this.price = price;
+		this.batchNum = batchNum;
+
+		this.supplier = supplier;
+		this.salesman = salesman;
+		this.sku = sku;
+
+	}
+
+	public Long getid() {
+		return id;
 	}
 
 	public Supplier getSupplier() {
@@ -68,8 +85,8 @@ public class Inventory {
 		this.salesman = salesman;
 	}
 
-	public void setInventoryId(Long inventoryId) {
-		this.inventoryId = inventoryId;
+	public void setid(Long inventoryId) {
+		this.id = inventoryId;
 	}
 
 	public int getQuantity() {
@@ -88,14 +105,6 @@ public class Inventory {
 		this.price = price;
 	}
 
-	public double getTotal() {
-		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
-	}
-
 	public List<Sale> getSalesList() {
 		return salesList;
 	}
@@ -103,5 +112,14 @@ public class Inventory {
 	public void setSalesList(List<Sale> salesList) {
 		this.salesList = salesList;
 	}
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+	
 
 }

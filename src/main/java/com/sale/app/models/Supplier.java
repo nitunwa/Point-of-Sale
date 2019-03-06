@@ -26,7 +26,7 @@ public class Supplier {
 	private String name;
 
 	@NotNull
-	private String password;
+	private String email;
 
 	@NotNull
 	private String company;
@@ -36,15 +36,25 @@ public class Supplier {
 	private String city;
 	@NotNull
 	private String state;
-	@NotNull
-	private int batchNumber;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "supplier", fetch = FetchType.LAZY)
 	private List<Inventory> inventoryList;
 	
 	
+	public Supplier() {
+		
+	}
 	
-	
+
+	public Supplier(String name, String email, String company, String street, String city, String state) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.company = company;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+	}
 
 	public Long getId() {
 		return id;
@@ -62,12 +72,14 @@ public class Supplier {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getCompany() {
@@ -102,14 +114,6 @@ public class Supplier {
 		this.state = state;
 	}
 
-	public int getBatchNumber() {
-		return batchNumber;
-	}
-
-	public void setBatchNumber(int batchNumber) {
-		this.batchNumber = batchNumber;
-	}
-
 	public List<Inventory> getInventoryList() {
 		return inventoryList;
 	}
@@ -118,6 +122,4 @@ public class Supplier {
 		this.inventoryList = inventoryList;
 	}
 
-	
-	
 }

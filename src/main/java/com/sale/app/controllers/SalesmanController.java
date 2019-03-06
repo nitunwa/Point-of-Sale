@@ -33,11 +33,11 @@ public class SalesmanController {
 	}
 
 	@RequestMapping(value = "/createSalesman", method = RequestMethod.POST)
-	public String createSalesman(Model model, @RequestParam(value = "salesmanName") String salesmanName,
+	public String createSalesman(Model model, @RequestParam(value = "salesmanName") String salesmanName, @RequestParam(value = "email") String email,
 			@RequestParam(value = "password") String password) {
 		try {
 			System.out.println("before create a salesman");
-			Salesman salesman = new Salesman(salesmanName, password);
+			Salesman salesman = new Salesman(salesmanName, email,password);
 
 			if (salesmanName.equals("") || password.equals("")) {
 				throw new Exception("Requied field is missing");
