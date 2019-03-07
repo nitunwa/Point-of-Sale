@@ -22,4 +22,11 @@ public class InventoryDaoImpl implements InventoryDao {
 		entityManager.persist(inventory);
 	}
 
+	@Override
+	public Inventory getInventoryPrice(String sku) {
+		Inventory inventory = entityManager.createQuery("from Inventory where sku= :sku", Inventory.class)
+				.setParameter("sku", sku).getSingleResult();
+		return inventory;
+	}
+
 }

@@ -54,41 +54,19 @@ table th, table td {
 <script type="text/javascript">
 //map has been used as associative array to store object
 	var dataMap = {}
-	
-	function updateTotalPrice(){
-		var quantity = $("#quantity").val();
-		var price = $("#priceId").val();
-		// $("#totalPriceId").val(price);
-		var itemPrice =parseInt(quantity) * parseInt(price)
-		
-		var totalPrice = $("#totalPriceId").val();
-		 totalPrice = parseInt(totalPrice)+ itemPrice
-		 
-		$("#totalPriceId").val(totalPrice)
-}
-	
 	$(document).ready(function() {
 		$(".add-row").click(function() {
-			
-		            	updateTotalPrice();
-		            	
 						var quantity = $("#quantity").val();
-						var price = $("#priceId").val();
 						var sku = $("#sku").val();
-						var totalPrice = $("#totalPriceId").val();
-						
 							dataMap[sku] = {
 											"quantity" : quantity,
 											 "sku" : sku
 											}
 												var markup = "<tr><td><input type='checkbox' name='record'></td><td>"
-														+ quantity + "</td><td>"
-														+ sku + "</td><td>"
-														+ totalPrice + "</td></tr>";
+														+ quantity
+														+ "</td><td>"
+														+ sku + "</td></tr>";
 												$("table tbody").append(markup);
-												 $('#quantity').val("");
-									              $('#sku').val("");
-									              $('#priceId').val("");
 											});
 
 						// Find and remove selected table rows
@@ -117,7 +95,7 @@ table th, table td {
 							console.log(saleList +"  ---------------");
 							
 							
-	
+	/* 
 						   var url = "http://localhost:8070/sale/sale/addsale";
 							
 						   $.ajax({
@@ -128,43 +106,20 @@ table th, table td {
 					              alert("success");
 					              $('#quantity').val("");
 					              $('#sku').val("");
-					              $('#totalPriceId').val("");
 					              $("#saleListTableId tbody").empty();
 					            },
 					            error: function(status){
 					            	alert("fail")
 					            },
 					            data: saleList
-					        });
+					        }); */
 						   
-						 
-
+							 $('#saleListId').val(saleList);
+							 $( "#saleFormId" ).submit();
 		
 	
 			   });
 });
-
-function getPrice(){
-	var sku= $("#sku").val();
-	
-	 var url = "http://localhost:8070/sale/inventory/getprice?sku="+sku;
-		
-	   $.ajax({
-          url: url,
-          type: 'get',
-          contentType: 'application/json',  // request
-          dataType : "json",  // response data type
-          success: function (data) {
-            //console.log(data)
-            $('#priceId').val(data);
-           
-          },
-          error: function(status){
-          	alert("fail to get price")
-          }
-      });
-	
-}
 </script>
 
 </head>
@@ -175,8 +130,8 @@ function getPrice(){
 
 	<div class="container">
 
-		<form th:action="@{/sale/addsale}" method="post" autocomplete="off"
-			style="max-width: 250px">
+		<form th:action="@{/testSale/saveSale}" method="post" autocomplete="off"
+			style="max-width: 250px" id="saleFormId">
 			<div class="form-group">
 				<h4>Enter Sale Details</h4>
 				<br />
@@ -184,12 +139,13 @@ function getPrice(){
 			</div>
 
 			<div class="form-group">
-			<input type="text" id="sku" name="" placeholder="SKU" onblur="getPrice()"/> 
-			<input type="text" id="priceId" placeholder="Price"  /> 
+			<input type="text" id="sku" placeholder="SKU" /> 
 				<input type="text" id="quantity" placeholder="Quantity" /> 
 				
-				
-				<input type="button" class="add-row" value="Add Row" />
+					<input type="button" class="add-row" value="Add Row" />
+			</div>
+			<div>
+			<input type="hidden" id="saleListId"  name="saleList" placeholder="saleList" /> 
 			</div>
 
 			<div>
@@ -199,14 +155,13 @@ function getPrice(){
 							<th>Select</th>
 							<th>Quantity</th>
 							<th>SKU</th>
-							<th>Total Price</th>
 						</tr>
 					</thead>
 					<tbody>
 						
 					</tbody>
 				</table>
-              <input type="hidden" id="totalPriceId" placeholder="Total Price" value="0"/> 
+
 			</div>
 
 			<button type="button" class="delete-row">Delete Row</button>
