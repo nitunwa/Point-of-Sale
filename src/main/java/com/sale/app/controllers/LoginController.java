@@ -48,6 +48,6 @@ public class LoginController {
 
 		}
 
-		return "redirect:/inventory/addInventory";
+		return "/main/main";
 	}
 }

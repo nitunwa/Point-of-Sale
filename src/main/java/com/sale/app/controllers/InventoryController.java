@@ -49,12 +49,19 @@ public class InventoryController {
 		return "inventory/addInventory";
 	}
 	
+	public List<Inventory> getinventoryList(){
+		List<Inventory> inventoryList = inventoryDao.getAllInventory();
+		return inventoryList;
+	}
+	
 	@RequestMapping(value="/addInventory", method=RequestMethod.POST)
 	public String addInventory(Model model,@RequestParam(value="supplierId") Long supplierId,@RequestParam(value="quantity") int quantity,
 			@RequestParam(value="price") double price,@RequestParam(value="batchNum") int batchNum,
 			@RequestParam(value="productId") Long productId, @RequestParam(value="sku") String sku,HttpSession httpSession){
 		
 	try{
+		List<Inventory> inventoryList = getinventoryList();
+		model.addAttribute("inventoryList", inventoryList);
 		Salesman user =(Salesman) httpSession.getAttribute("loginOperator");
 		//System.out.println(salesman.getEmail());
 		Product product = productDao.getProduct(productId);

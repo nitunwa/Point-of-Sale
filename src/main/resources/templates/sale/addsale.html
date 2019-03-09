@@ -58,7 +58,6 @@ table th, table td {
 	function updateTotalPrice(){
 		var quantity = $("#quantity").val();
 		var price = $("#priceId").val();
-		// $("#totalPriceId").val(price);
 		var itemPrice =parseInt(quantity) * parseInt(price)
 		
 		var totalPrice = $("#totalPriceId").val();
@@ -134,7 +133,7 @@ table th, table td {
 					            error: function(status){
 					            	alert("fail")
 					            },
-					            data: saleList
+					            data: saleList;
 					        });
 						   
 						 
@@ -164,7 +163,7 @@ function getPrice(){
           }
       });
 	
-}
+ }
 </script>
 
 </head>
@@ -184,7 +183,7 @@ function getPrice(){
 			</div>
 
 			<div class="form-group">
-			<input type="text" id="sku" name="" placeholder="SKU" onblur="getPrice()"/> 
+			<input type="text" id="sku"  placeholder="SKU" onblur="getPrice()"/> 
 			<input type="text" id="priceId" placeholder="Price"  /> 
 				<input type="text" id="quantity" placeholder="Quantity" /> 
 				

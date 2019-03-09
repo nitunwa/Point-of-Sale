@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>Theme Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+
+<!-- Bootstrap theme -->
+
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"
+	media="screen" />
+
+<!-- Custom styles for this template -->
+
+
+<link th:href="@{/css/theme.css}" rel="stylesheet" media="screen" />
+<style>
+
+{
+ overflow: auto;
+}
+html, body, div, iframe 
+{
+
+ margin: 0px; 
+ padding: 15px; 
+ height: 100%; 
+ border: none;
+}
+iframe 
+{
+ display: block; 
+ width: 100%; 
+ border: none; 
+ overflow-y: auto; 
+ overflow-x: hidden;
+  height:800px;
+}
+table{
+  width:100%;
+  table-layout:fixe;
+  }
+</style>
+
+</head>
+
+<body>
+<table>
+<tr>
+<td style="width:20%;">
+
+<!--
+#######################
+the links to the iframe use the iframe name as the TARGET
+####################### -->
+<h3>
+<a href="http://localhost:8070/sale/product/addProduct" target="iframe1">
+Item
+</a>
+</h3>
+<h3>
+<a href="http://localhost:8070/sale/inventory/addInventory" target="iframe1">
+Inventory
+</a>
+</h3>
+
+<h3>
+<a href="http://localhost:8070/sale/supplier/createSupplier" target="iframe1">
+Supplier
+</a>
+</h3>
+
+<h3>
+<a href="http://localhost:8070/sale/salesman/createSalesman" target="iframe1">
+Salesman
+</a>
+</h3>
+
+<h3>
+<a href="http://localhost:8070/sale/sale/addsale" target="iframe1">
+Sale
+</a>
+</h3>
+</td>
+<td  style="width:80%;">
+
+
+
+<iframe id="tree" name="iframe1" src="http://www.agoogleaday.com/#date=2012-03-27"></iframe>
+</tr>
+</table>
+
+	
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<script src="../static/js/bootstrap.min.js"
+		th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

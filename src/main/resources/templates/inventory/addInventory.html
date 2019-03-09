@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content=""/>
-<meta name="author" content=""/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
 <title>Theme Template for Bootstrap</title>
 
@@ -29,79 +29,122 @@
 
 </head>
 
-  <body>
+<body>
 
-    <!-- Fixed navbar -->
-    
-<div class="container">
+	<!-- Fixed navbar -->
 
-    <form  th:action="@{/inventory/addInventory}" method="post" autocomplete="off" style ="max-width:250px" >
-  <div class="form-group">
-  <h4>Enter Inventory Details</h4><br/>
-  
- <label for="exampleInputName1">Product Name</label>
-  <select class="form-control" id="productId" name="productId">
-        <option value="">Select Product</option>
-        <option th:each="product : ${productList}"
-                th:value="${product.productId}"
-                th:text="${product.productName}"></option>
-    </select>
-  
-    
-    <!--  <input type="text" name="bookName"  class="form-control" id="exampleInputName" aria-describedby="namelHelp" placeholder="bookName">-->
-    <input type="hidden" name="id"   class="form-control" id="exampleInputId" aria-describedby="idlHelp" placeholder="id" />
-  </div>
- 
-  <div class="form-group">
-    <label for="exampleInputName1">Quantity</label>
-    <input type="text" name="quantity"  class="form-control" id="exampleInputQuantity" aria-describedby="namelHelp" placeholder="Quantity">
-    
-   </div>
-   <div class="form-group">
-    <label for="exampleInputprice">Price</label>
-    <input type="text" name="price"  class="form-control" id="exampleInputPrice" aria-describedby="namelHelp" placeholder="Price">
-    
-  </div>
-  
-   
-  <div class="form-group">
-    <label for="exampleInputbatchNum">Batch Number</label>
-    <input type="text" name="batchNum"  class="form-control" id="exampleInputBatchNum" aria-describedby="namelHelp" placeholder="BatchNum">
-    
-  </div>
-  <div class="form-group">
-    <label for="examplesupplier_Id">Supplier Name</label>
-    <select class="form-control" id="supplierId" name="supplierId">
-        <option value="">Supplier Name</option>
-        <option th:each="supplier : ${supplierList}"
-                th:value="${supplier.id}"
-                th:text="${supplier.name}"></option>
-    </select>
-    
-    
-  </div>
- 
-  
-  
-  <div class="form-group">
-    <label for="exampleInputbatchNum">SKU</label>
-    <input type="text" name="sku"  class="form-control" id="exampleInputsku" aria-describedby="namelHelp" placeholder="sku">
-    
-  </div>
-  
-<button type="submit" class="btn btn-primary"  >Save</button>
-   <a class="btn  btn-default" th:href="@{/}" >Cancel</a> <br/>
-   
-  </form>
-    </div> <!-- /container -->
-   
-    <!-- Bootstrap core JavaScript
+	<div class="container">
+
+		<form th:action="@{/inventory/addInventory}" method="post"
+			autocomplete="off">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="exampleInputName1">Product Name</label> <select
+						class="form-control" id="productId" name="productId">
+						<option value="">Select Product</option>
+						<option th:each="product : ${productList}"
+							th:value="${product.productId}" th:text="${product.productName}"></option>
+					</select> <input type="hidden" name="id" class="form-control"
+						id="exampleInputId" aria-describedby="idlHelp" placeholder="id" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="exampleInputName1">Quantity</label> <input type="text"
+						name="quantity" class="form-control" id="exampleInputQuantity"
+						aria-describedby="namelHelp" placeholder="Quantity">
+				</div>
+
+			</div>
+
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="exampleInputprice">Price</label> <input type="text"
+						name="price" class="form-control" id="exampleInputPrice"
+						aria-describedby="namelHelp" placeholder="Price">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="exampleInputbatchNum">Batch Number</label> <input
+						type="text" name="batchNum" class="form-control"
+						id="exampleInputBatchNum" aria-describedby="namelHelp"
+						placeholder="BatchNum">
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="examplesupplier_Id">Supplier Name</label> <select
+						class="form-control" id="supplierId" name="supplierId">
+						<option value="">Supplier Name</option>
+						<option th:each="supplier : ${supplierList}"
+							th:value="${supplier.id}" th:text="${supplier.name}"></option>
+					</select>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="exampleInputbatchNum">SKU</label> <input type="text"
+						name="sku" class="form-control" id="exampleInputsku"
+						aria-describedby="namelHelp" placeholder="sku">
+
+				</div>
+				<div class="form-group col-md-6">
+					<button type="submit" class="btn btn-primary">Save</button>
+					<a class="btn  btn-default" th:href="@{/}">Cancel</a> <br />
+				</div>
+
+			</div>
+
+          
+            
+			<div>
+
+				<div class="form-row">
+
+					<div class="form-group col-md-6">
+						<div class="table table-bordered">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Product Name</th>
+										<th>Date</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="product,iterationStatus  : ${productList}">
+
+										<td th:text="${product.productId}">id</td>
+										<td th:text="${product.productName}">name</td>
+
+										<td th:text="${product.currentDate}">date</td>
+
+
+
+										<td><a
+											th:href="@{/product/deleteById(productId=${product.productId})}">Delete</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
+					</div>
+				</div>
+			</div>
+			
+
+
+		</form>
+	</div>
+	
+	
+	
+	<!-- /container -->
+
+	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	
+
 	<script src="../static/js/bootstrap.min.js"
-	th:src="@{/js/bootstrap.min.js}"></script>
+		th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
