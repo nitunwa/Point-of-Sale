@@ -59,7 +59,7 @@ table th, table td {
 		var quantity = $("#quantity").val();
 		var price = $("#priceId").val();
 		var itemPrice =parseInt(quantity) * parseInt(price)
-		
+		var total = $("#itemPriceId").val(itemPrice);
 		var totalPrice = $("#totalPriceId").val();
 		 totalPrice = parseInt(totalPrice)+ itemPrice
 		 
@@ -75,7 +75,7 @@ table th, table td {
 						var price = $("#priceId").val();
 						var sku = $("#sku").val();
 						var totalPrice = $("#totalPriceId").val();
-						
+						var total = $("#itemPriceId").val();
 							dataMap[sku] = {
 											"quantity" : quantity,
 											 "sku" : sku
@@ -83,7 +83,7 @@ table th, table td {
 												var markup = "<tr><td><input type='checkbox' name='record'></td><td>"
 														+ quantity + "</td><td>"
 														+ sku + "</td><td>"
-														+ totalPrice + "</td></tr>";
+														+ total + "</td></tr>";
 												$("table tbody").append(markup);
 												 $('#quantity').val("");
 									              $('#sku').val("");
@@ -133,7 +133,7 @@ table th, table td {
 					            error: function(status){
 					            	alert("fail")
 					            },
-					            data: saleList;
+					            data: saleList,
 					        });
 						   
 						 
@@ -205,7 +205,8 @@ function getPrice(){
 						
 					</tbody>
 				</table>
-              <input type="hidden" id="totalPriceId" placeholder="Total Price" value="0"/> 
+           Total Price <input type="text" id="totalPriceId" placeholder="Total Price" value="0"/>
+              <input type="hidden" id="itemPriceId" placeholder="Item Price" value="0"/> 
 			</div>
 
 			<button type="button" class="delete-row">Delete Row</button>

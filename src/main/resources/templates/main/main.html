@@ -26,82 +26,77 @@
 
 <link th:href="@{/css/theme.css}" rel="stylesheet" media="screen" />
 <style>
+{
+overflow
+:
+ 
+auto
+;
 
-{
- overflow: auto;
-}
-html, body, div, iframe 
-{
 
- margin: 0px; 
- padding: 15px; 
- height: 100%; 
- border: none;
 }
-iframe 
-{
- display: block; 
- width: 100%; 
- border: none; 
- overflow-y: auto; 
- overflow-x: hidden;
-  height:800px;
+html, body, div, iframe {
+	margin: 0px;
+	padding: 5px;
+	height: 100%;
+	border: none;
 }
-table{
-  width:100%;
-  table-layout:fixe;
-  }
+
+iframe {
+	display: block;
+	width: 100%;
+	border: none;
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 800px;
+}
+
+table {
+	width: 100%;
+	table-layout: fixe;
+}
 </style>
 
 </head>
 
 <body>
-<table>
-<tr>
-<td style="width:20%;">
-
-<!--
+	<table>
+		<tr>
+			<td style="width: 20%; margin-top: 20px" valign="top">
+				<!--
 #######################
 the links to the iframe use the iframe name as the TARGET
 ####################### -->
-<h3>
-<a href="http://localhost:8070/sale/product/addProduct" target="iframe1">
-Item
-</a>
-</h3>
-<h3>
-<a href="http://localhost:8070/sale/inventory/addInventory" target="iframe1">
-Inventory
-</a>
-</h3>
+				<h3>
+					<a href="http://localhost:8070/sale/product/addProduct"
+						target="iframe1"> Item </a>
+				</h3>
+				<h3>
+					<a href="http://localhost:8070/sale/inventory/addInventory"
+						target="iframe1"> Inventory </a>
+				</h3>
 
-<h3>
-<a href="http://localhost:8070/sale/supplier/createSupplier" target="iframe1">
-Supplier
-</a>
-</h3>
+				<h3>
+					<a href="http://localhost:8070/sale/supplier/createSupplier"
+						target="iframe1"> Supplier </a>
+				</h3>
 
-<h3>
-<a href="http://localhost:8070/sale/salesman/createSalesman" target="iframe1">
-Salesman
-</a>
-</h3>
+				<h3>
+					<a href="http://localhost:8070/sale/salesman/createSalesman"
+						target="iframe1"> Salesman </a>
+				</h3>
 
-<h3>
-<a href="http://localhost:8070/sale/sale/addsale" target="iframe1">
-Sale
-</a>
-</h3>
-</td>
-<td  style="width:80%;">
+				<h3>
+					<a th:href="@{/sale/addsale}" target="iframe1">
+						Sales </a>
+				</h3>
+			</td>
+			<td style="width: 80%;"><iframe id="tree" name="iframe1"
+					 th:src="@{/dashboard}"></iframe>
+		</tr>
+	</table>
 
 
-
-<iframe id="tree" name="iframe1" src="http://www.agoogleaday.com/#date=2012-03-27"></iframe>
-</tr>
-</table>
-
-	
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

@@ -48,6 +48,6 @@ public class LoginController {
 
 		}
 
-		return "/main/main";
+		return "redirect:/index";
 	}
 }

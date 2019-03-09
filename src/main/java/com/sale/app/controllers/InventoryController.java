@@ -45,12 +45,13 @@ public class InventoryController {
 		model.addAttribute("productList", productList);
 		List<Supplier> supplierList = supplierDao.getAllSupplier();
 		model.addAttribute("supplierList", supplierList);
-		
+		getinventoryList(model);
 		return "inventory/addInventory";
 	}
 	
-	public List<Inventory> getinventoryList(){
+	public List<Inventory> getinventoryList(Model model){
 		List<Inventory> inventoryList = inventoryDao.getAllInventory();
+		model.addAttribute("inventoryList", inventoryList);
 		return inventoryList;
 	}
 	
@@ -60,7 +61,7 @@ public class InventoryController {
 			@RequestParam(value="productId") Long productId, @RequestParam(value="sku") String sku,HttpSession httpSession){
 		
 	try{
-		List<Inventory> inventoryList = getinventoryList();
+		List<Inventory> inventoryList = getinventoryList(model);
 		model.addAttribute("inventoryList", inventoryList);
 		Salesman user =(Salesman) httpSession.getAttribute("loginOperator");
 		//System.out.println(salesman.getEmail());

@@ -11,4 +11,8 @@ public class MainController {
 	public String showmain() {
 		return "/main/main";
 	}
+	@RequestMapping(value= "/dashboard", method = RequestMethod.GET)
+	public String dashboard() {
+		return "/main/dashboard";
+	}
 }

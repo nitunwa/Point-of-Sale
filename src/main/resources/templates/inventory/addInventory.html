@@ -34,108 +34,119 @@
 	<!-- Fixed navbar -->
 
 	<div class="container">
-
-		<form th:action="@{/inventory/addInventory}" method="post"
-			autocomplete="off">
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="exampleInputName1">Product Name</label> <select
-						class="form-control" id="productId" name="productId">
-						<option value="">Select Product</option>
-						<option th:each="product : ${productList}"
-							th:value="${product.productId}" th:text="${product.productName}"></option>
-					</select> <input type="hidden" name="id" class="form-control"
-						id="exampleInputId" aria-describedby="idlHelp" placeholder="id" />
-				</div>
-				<div class="form-group col-md-6">
-					<label for="exampleInputName1">Quantity</label> <input type="text"
-						name="quantity" class="form-control" id="exampleInputQuantity"
-						aria-describedby="namelHelp" placeholder="Quantity">
-				</div>
-
-			</div>
-
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="exampleInputprice">Price</label> <input type="text"
-						name="price" class="form-control" id="exampleInputPrice"
-						aria-describedby="namelHelp" placeholder="Price">
-				</div>
-				<div class="form-group col-md-6">
-					<label for="exampleInputbatchNum">Batch Number</label> <input
-						type="text" name="batchNum" class="form-control"
-						id="exampleInputBatchNum" aria-describedby="namelHelp"
-						placeholder="BatchNum">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="examplesupplier_Id">Supplier Name</label> <select
-						class="form-control" id="supplierId" name="supplierId">
-						<option value="">Supplier Name</option>
-						<option th:each="supplier : ${supplierList}"
-							th:value="${supplier.id}" th:text="${supplier.name}"></option>
-					</select>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="exampleInputbatchNum">SKU</label> <input type="text"
-						name="sku" class="form-control" id="exampleInputsku"
-						aria-describedby="namelHelp" placeholder="sku">
+		<div class="row">
+			<form th:action="@{/inventory/addInventory}" method="post"
+				autocomplete="off">
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="exampleInputName1">Product Name</label> <select
+							class="form-control" id="productId" name="productId">
+							<option value="">Select Product</option>
+							<option th:each="product : ${productList}"
+								th:value="${product.productId}" th:text="${product.productName}"></option>
+						</select> <input type="hidden" name="id" class="form-control"
+							id="exampleInputId" aria-describedby="idlHelp" placeholder="id" />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="exampleInputName1">Quantity</label> <input type="text"
+							name="quantity" class="form-control" id="exampleInputQuantity"
+							aria-describedby="namelHelp" placeholder="Quantity">
+					</div>
 
 				</div>
-				<div class="form-group col-md-6">
-					<button type="submit" class="btn btn-primary">Save</button>
-					<a class="btn  btn-default" th:href="@{/}">Cancel</a> <br />
-				</div>
-
-			</div>
-
-          
-            
-			<div>
 
 				<div class="form-row">
-
 					<div class="form-group col-md-6">
-						<div class="table table-bordered">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Product Name</th>
-										<th>Date</th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="product,iterationStatus  : ${productList}">
-
-										<td th:text="${product.productId}">id</td>
-										<td th:text="${product.productName}">name</td>
-
-										<td th:text="${product.currentDate}">date</td>
-
-
-
-										<td><a
-											th:href="@{/product/deleteById(productId=${product.productId})}">Delete</a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
+						<label for="exampleInputprice">Price</label> <input type="text"
+							name="price" class="form-control" id="exampleInputPrice"
+							aria-describedby="namelHelp" placeholder="Price">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="exampleInputbatchNum">Batch Number</label> <input
+							type="text" name="batchNum" class="form-control"
+							id="exampleInputBatchNum" aria-describedby="namelHelp"
+							placeholder="BatchNum">
 					</div>
 				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="examplesupplier_Id">Supplier Name</label> <select
+							class="form-control" id="supplierId" name="supplierId">
+							<option value="">Supplier Name</option>
+							<option th:each="supplier : ${supplierList}"
+								th:value="${supplier.id}" th:text="${supplier.name}"></option>
+						</select>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="exampleInputbatchNum">SKU</label> <input type="text"
+							name="sku" class="form-control" id="exampleInputsku"
+							aria-describedby="namelHelp" placeholder="sku">
+
+					</div>
+					<div class="form-group col-md-6">
+						<button type="submit" class="btn btn-primary">Save</button>
+						<a class="btn  btn-default" th:href="@{/}">Cancel</a> <br />
+					</div>
+
+				</div>
+
+			</form>
+		</div>
+		
+
+		<div class="row" >
+
+			<div class="col-md-12 col-md-offset-3">
+
+				<div class="form-group col-md-6">
+					<div class="table table-bordered">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Product Name</th>
+									<th>Quantity</th>
+									<th>Price</th>
+									<th>Batch Number</th>
+									<th>Supplier Name</th>
+									<th>SKU</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="inventory,iterationStatus  : ${inventoryList}">
+
+									<td th:text="${inventory.id}">id</td>
+									<td th:text="${inventory.productName}">Product Name</td>
+
+									<td th:text="${inventory.currentDate}">date</td>
+									
+									<td th:text="${inventory.productId}">id</td>
+									<td th:text="${inventory.productName}">name</td>
+
+									<td th:text="${inventory.currentDate}">date</td>
+
+
+
+									<td><a
+										th:href="@{/product/deleteById(productId=${product.productId})}">Delete</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- <a class="btn  btn-default" th:href="" >Back</a> -->
+				</div>
 			</div>
-			
+		</div>
 
 
-		</form>
+
+
 	</div>
-	
-	
-	
+
+
+
 	<!-- /container -->
 
 	<!-- Bootstrap core JavaScript
