@@ -13,8 +13,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "sale")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="saleId")
 public class Sale {
 
 	@Id
@@ -29,6 +33,8 @@ public class Sale {
 
 	@NotNull
 	private Date currentDate = new Date();
+	@NotNull
+	private double tax;
 	@NotNull
 	private double total;
 
@@ -89,6 +95,16 @@ public class Sale {
 
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
+	}
+	
+	
+
+	public double getTax() {
+		return tax;
+	}
+
+	public void setTax(double tax) {
+		this.tax = tax;
 	}
 
 	public double getTotal() {

@@ -39,10 +39,10 @@ public class SaleController {
 	
 	@RequestMapping(value = "/addsale", method = RequestMethod.POST)
 	public ResponseEntity<?> addsale(@RequestBody List<Inventory> inventoryList, HttpSession httpssion) {
-		/*Salesman operator = (Salesman) httpssion.getAttribute("loginOperator");
+		Salesman operator = (Salesman) httpssion.getAttribute("loginOperator");
 
-		Salesman salesman = salemanDao.getSalesman(operator.getId());*/
-		Salesman salesman = salemanDao.getSalesman(15L);
+		Salesman salesman = salemanDao.getSalesman(operator.getId());
+		//Salesman salesman = salemanDao.getSalesman(15L);
 
 		for (Inventory inventory : inventoryList) {
 			System.out.println(inventory.getQuantity());

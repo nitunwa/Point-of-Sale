@@ -56,14 +56,32 @@ table th, table td {
 	var dataMap = {}
 	
 	function updateTotalPrice(){
+		addTax();
 		var quantity = $("#quantity").val();
-		var price = $("#priceId").val();
-		var itemPrice =parseInt(quantity) * parseInt(price)
-		var total = $("#itemPriceId").val(itemPrice);
+		var unitPrice = $("#priceId").val();
+		var tax = $("#taxId").val();
+		  
+		var itemPrice =parseFloat(quantity) * parseFloat(unitPrice)
+		    itemPrice = itemPrice.toFixed(2);
+		 $("#itemPriceId").val(itemPrice);
+		 var afterTaxPrice = parseFloat(itemPrice) + parseFloat(tax)
+		     afterTaxPrice = afterTaxPrice.toFixed(2);
+		   $("#afterTaxPriceId").val(afterTaxPrice); 
 		var totalPrice = $("#totalPriceId").val();
-		 totalPrice = parseInt(totalPrice)+ itemPrice
+		totalPrice = parseFloat(totalPrice)+ parseFloat(afterTaxPrice)
 		 
 		$("#totalPriceId").val(totalPrice)
+}
+ 
+//add tax 
+function addTax(){
+	var quantity = $("#quantity").val();
+    var unitPrice = $("#priceId").val();
+	var tax = parseFloat(unitPrice)* .1 *quantity;
+	tax=tax.toFixed(2);
+	$("#taxId").val(tax);
+	
+	
 }
 	
 	$(document).ready(function() {
@@ -72,22 +90,29 @@ table th, table td {
 		            	updateTotalPrice();
 		            	
 						var quantity = $("#quantity").val();
-						var price = $("#priceId").val();
+						var unitPrice = $("#priceId").val();
 						var sku = $("#sku").val();
 						var totalPrice = $("#totalPriceId").val();
 						var total = $("#itemPriceId").val();
+						var tax = $("#taxId").val()
+						   
+						var afterTaxPrice = $("#afterTaxPriceId").val()
 							dataMap[sku] = {
 											"quantity" : quantity,
 											 "sku" : sku
 											}
 												var markup = "<tr><td><input type='checkbox' name='record'></td><td>"
-														+ quantity + "</td><td>"
 														+ sku + "</td><td>"
-														+ total + "</td></tr>";
+														+ quantity + "</td><td>"
+														+ unitPrice + "</td><td>"
+														+ total + "</td><td>"
+														+ tax + "</td><td>"
+														+ afterTaxPrice + "</td></tr>";
 												$("table tbody").append(markup);
 												 $('#quantity').val("");
 									              $('#sku').val("");
 									              $('#priceId').val("");
+									              $('#productNameId').val("");
 											});
 
 						// Find and remove selected table rows
@@ -103,13 +128,13 @@ table th, table td {
 						
 						// save
 						$(".save-data").click(function() {
-							var arr = [];
+							 var arr = [];
 							var i = 0;
 							for ( var sku in dataMap) {
 								var value = dataMap[sku];
 								arr[i]=value;
 								i++;
-							}
+							} 
 							var saleList = JSON.stringify(arr);
 							dataMap={}
 							
@@ -125,8 +150,6 @@ table th, table td {
 					            contentType: 'application/json',
 					            success: function (data) {
 					              alert("success");
-					              $('#quantity').val("");
-					              $('#sku').val("");
 					              $('#totalPriceId').val("");
 					              $("#saleListTableId tbody").empty();
 					            },
@@ -136,17 +159,14 @@ table th, table td {
 					            data: saleList,
 					        });
 						   
-						 
-
-		
-	
-			   });
-});
+						 });
+						
+      });
 
 function getPrice(){
 	var sku= $("#sku").val();
 	
-	 var url = "http://localhost:8070/sale/inventory/getprice?sku="+sku;
+	 var url = "http://localhost:8070/sale/inventory/getInventory?sku="+sku;
 		
 	   $.ajax({
           url: url,
@@ -155,7 +175,9 @@ function getPrice(){
           dataType : "json",  // response data type
           success: function (data) {
             //console.log(data)
-            $('#priceId').val(data);
+            $('#priceId').val(data.price);
+            $('#productNameId').val(data.product.productName);
+            
            
           },
           error: function(status){
@@ -185,7 +207,10 @@ function getPrice(){
 			<div class="form-group">
 			<input type="text" id="sku"  placeholder="SKU" onblur="getPrice()"/> 
 			<input type="text" id="priceId" placeholder="Price"  /> 
+			<input type="text" id="productNameId" placeholder="ProductName" onblur="getPrice()"  /> 
 				<input type="text" id="quantity" placeholder="Quantity" /> 
+				<input type="hidden" id="taxId" placeholder="tax" /> 
+				<input type="hidden" id="afterTaxPriceId" placeholder="After Tax Price" /> 
 				
 				
 				<input type="button" class="add-row" value="Add Row" />
@@ -196,8 +221,12 @@ function getPrice(){
 					<thead>
 						<tr>
 							<th>Select</th>
-							<th>Quantity</th>
 							<th>SKU</th>
+							<th>Quantity</th>
+							<th>Unit Price</th>
+							<!-- <th>Items Total </th> -->
+							<th>SubTotal </th>
+							<th>Tax </th>
 							<th>Total Price</th>
 						</tr>
 					</thead>

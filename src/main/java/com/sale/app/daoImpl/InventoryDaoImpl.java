@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sale.app.dao.InventoryDao;
 import com.sale.app.models.Inventory;
+import com.sale.app.models.Product;
 
 @Repository
 @Transactional
@@ -36,6 +37,22 @@ public class InventoryDaoImpl implements InventoryDao {
 	public List<Inventory> getAllInventory() {
 		
 		return entityManager.createQuery("from Inventory").getResultList();
+	}
+
+	@Override
+	public void removeInventory(Inventory inventory) {
+		Inventory inventoryPro= entityManager.find(Inventory.class, inventory.getId());
+	 entityManager.remove(inventoryPro);
+	}
+
+	@Override
+	public Inventory getInventoryBySku(String sku) {
+		String sql = "SELECT inv FROM Inventory inv " + "JOIN FETCH inv.product p  where inv.sku= :sku";
+		Inventory inventory = entityManager.createQuery(sql, Inventory.class)
+				.setParameter("sku", sku).getSingleResult();
+		return inventory;
+		
+		
 	}
 
 }

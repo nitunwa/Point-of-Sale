@@ -38,6 +38,7 @@
 			<form th:action="@{/inventory/addInventory}" method="post"
 				autocomplete="off">
 				<div class="form-row">
+					
 					<div class="form-group col-md-6">
 						<label for="exampleInputName1">Product Name</label> <select
 							class="form-control" id="productId" name="productId">
@@ -47,6 +48,7 @@
 						</select> <input type="hidden" name="id" class="form-control"
 							id="exampleInputId" aria-describedby="idlHelp" placeholder="id" />
 					</div>
+					
 					<div class="form-group col-md-6">
 						<label for="exampleInputName1">Quantity</label> <input type="text"
 							name="quantity" class="form-control" id="exampleInputQuantity"
@@ -68,7 +70,9 @@
 							placeholder="BatchNum">
 					</div>
 				</div>
+				
 				<div class="form-row">
+					
 					<div class="form-group col-md-6">
 						<label for="examplesupplier_Id">Supplier Name</label> <select
 							class="form-control" id="supplierId" name="supplierId">
@@ -116,21 +120,20 @@
 							<tbody>
 								<tr th:each="inventory,iterationStatus  : ${inventoryList}">
 
-									<td th:text="${inventory.id}">id</td>
-									<td th:text="${inventory.productName}">Product Name</td>
+									<td th:text="${inventory.id}">id</td> 
+									<td th:text="${inventory.product.productName}">Product Name</td>
 
-									<td th:text="${inventory.currentDate}">date</td>
+									<td th:text="${inventory.quantity}">quantity</td>
 									
-									<td th:text="${inventory.productId}">id</td>
-									<td th:text="${inventory.productName}">name</td>
+									<td th:text="${inventory.price}">price</td>
+									<td th:text="${inventory.batchNum}">Batch Number</td>
+									<td th:text="${inventory.supplier.name}">Supplier Namer</td>
+									<td th:text="${inventory.sku}">SKU</td>
 
-									<td th:text="${inventory.currentDate}">date</td>
 
 
-
-									<td><a
-										th:href="@{/product/deleteById(productId=${product.productId})}">Delete</a>
-									</td>
+									<!-- <td><a th:href="@{/inventory/delectInventoryById(id=${inventory.id})}">Delete</a>
+									</td> -->
 								</tr>
 							</tbody>
 						</table>
