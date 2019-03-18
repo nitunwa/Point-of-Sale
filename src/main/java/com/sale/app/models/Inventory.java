@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "inventory")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +36,9 @@ public class Inventory {
 
 	@NotNull
 	private String sku;
+
+	@NotNull
+	private double tax;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory", fetch = FetchType.LAZY)
 	private List<Sale> salesList;
@@ -54,16 +57,14 @@ public class Inventory {
 
 	public Inventory() {
 	}
-	
 
 	public Inventory(Long id) {
 		super();
 		this.id = id;
 	}
 
-
-	public Inventory(Product product, int quantity, double price, int batchNum,  Supplier supplier,
-			Salesman salesman,String sku) {
+	public Inventory(Product product, int quantity, double price, int batchNum, Supplier supplier, Salesman salesman,
+			String sku) {
 		super();
 		this.product = product;
 		this.quantity = quantity;
@@ -76,106 +77,90 @@ public class Inventory {
 
 	}
 
-	
-
-
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public int getQuantity() {
 		return quantity;
 	}
-
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-
 	public double getPrice() {
 		return price;
 	}
-
 
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-
 	public int getBatchNum() {
 		return batchNum;
 	}
-
 
 	public void setBatchNum(int batchNum) {
 		this.batchNum = batchNum;
 	}
 
-
 	public String getSku() {
 		return sku;
 	}
-
 
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
 
+	public double getTax() {
+		return tax;
+	}
+
+	public void setTax(double tax) {
+		this.tax = tax;
+	}
 
 	public List<Sale> getSalesList() {
 		return salesList;
 	}
 
-
 	public void setSalesList(List<Sale> salesList) {
 		this.salesList = salesList;
 	}
-
 
 	public Supplier getSupplier() {
 		return supplier;
 	}
 
-
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
-
 
 	public Salesman getSalesman() {
 		return salesman;
 	}
 
-
 	public void setSalesman(Salesman salesman) {
 		this.salesman = salesman;
 	}
-
 
 	public Product getProduct() {
 		return product;
 	}
 
-
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Inventory [id=" + id + ", quantity=" + quantity + ", price=" + price + ", batchNum=" + batchNum
 				+ ", sku=" + sku + "]";
 	}
-	
-	
-	
 
 }

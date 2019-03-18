@@ -61,7 +61,7 @@ public class SaleTransectionController {
 			inventoryList = getInvertoryListFromStr(saleList);
 			for (Inventory inventory : inventoryList) {
 				System.out.println(inventory.getQuantity());
-				saleDao.saveTranjection(inventory.getQuantity(), inventory.getSku(), salesman);
+				saleDao.saveTranjection(inventory.getQuantity(), inventory.getSku(), salesman,inventory.getTax());
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -21,7 +21,7 @@ public class SaleDaoImpl implements SaleDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void saveTranjection(int quantity, String sku,Salesman salesman) {
+	public void saveTranjection(int quantity, String sku,Salesman salesman,double tax) {
 
 		Inventory inventory = entityManager.createQuery("from Inventory where sku= :sku", Inventory.class)
 				.setParameter("sku", sku).getSingleResult();
@@ -31,6 +31,7 @@ public class SaleDaoImpl implements SaleDao {
 		sale.setQuantity(quantity);
 		sale.setPrice(inventory.getPrice());
 		sale.setInventory(inventory);
+		sale.setTax(tax);
 		sale.setTotal(totalPrice);
 		sale.setSalesman(salesman);
 		entityManager.persist(sale);

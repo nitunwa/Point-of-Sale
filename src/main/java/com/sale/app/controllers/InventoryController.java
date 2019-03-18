@@ -102,4 +102,4 @@ public class InventoryController {
 		inventoryDao.removeInventory(inventory);
 
 	}
-}
+} 

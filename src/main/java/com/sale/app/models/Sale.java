@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "sale")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="saleId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "saleId")
 public class Sale {
 
 	@Id
@@ -33,8 +33,10 @@ public class Sale {
 
 	@NotNull
 	private Date currentDate = new Date();
+	
 	@NotNull
 	private double tax;
+	
 	@NotNull
 	private double total;
 
@@ -96,8 +98,6 @@ public class Sale {
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
-	
-	
 
 	public double getTax() {
 		return tax;

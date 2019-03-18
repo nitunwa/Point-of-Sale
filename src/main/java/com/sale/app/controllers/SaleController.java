@@ -46,7 +46,7 @@ public class SaleController {
 
 		for (Inventory inventory : inventoryList) {
 			System.out.println(inventory.getQuantity());
-			saleDao.saveTranjection(inventory.getQuantity(), inventory.getSku(), salesman);
+			saleDao.saveTranjection(inventory.getQuantity(), inventory.getSku(), salesman,inventory.getTax());
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
