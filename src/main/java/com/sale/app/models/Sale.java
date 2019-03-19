@@ -1,6 +1,8 @@
 package com.sale.app.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,32 +27,25 @@ public class Sale {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long saleId;
-
-	@NotNull
-	private int quantity;
-
-	@NotNull
-	private double price;
-
+	
 	@NotNull
 	private Date currentDate = new Date();
 	
-	@NotNull
-	private double tax;
+	
+	private Long customerId;
 	
 	@NotNull
 	private double total;
-
+	
+	
+	private String credit_card;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "salesman_Id")
 	private Salesman salesman;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "inventory_Id")
-	private Inventory inventory;
-
-	public Sale() {
-	}
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sale", fetch = FetchType.LAZY)
+	List<SaleDetails> salesList;
 
 	public Long getSaleId() {
 		return saleId;
@@ -57,22 +53,6 @@ public class Sale {
 
 	public void setSaleId(Long saleId) {
 		this.saleId = saleId;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
 	}
 
 	public Date getCurrentDate() {
@@ -83,6 +63,22 @@ public class Sale {
 		this.currentDate = currentDate;
 	}
 
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCredit_card() {
+		return credit_card;
+	}
+
+	public void setCredit_card(String credit_card) {
+		this.credit_card = credit_card;
+	}
+
 	public Salesman getSalesman() {
 		return salesman;
 	}
@@ -91,20 +87,12 @@ public class Sale {
 		this.salesman = salesman;
 	}
 
-	public Inventory getInventory() {
-		return inventory;
+	public List<SaleDetails> getSalesList() {
+		return salesList;
 	}
 
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
-	}
-
-	public double getTax() {
-		return tax;
-	}
-
-	public void setTax(double tax) {
-		this.tax = tax;
+	public void setSalesList(List<SaleDetails> salesList) {
+		this.salesList = salesList;
 	}
 
 	public double getTotal() {
@@ -114,5 +102,8 @@ public class Sale {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
+	
+	
 
 }

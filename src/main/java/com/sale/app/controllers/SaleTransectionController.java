@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sale.app.dao.SaleDao;
 import com.sale.app.dao.SalesmanDao;
 import com.sale.app.models.Inventory;
-import com.sale.app.models.Sale;
+import com.sale.app.models.SaleDetails;
 import com.sale.app.models.Salesman;
 
 @Controller
@@ -50,19 +50,20 @@ public class SaleTransectionController {
 	
 	@RequestMapping(value = "/saveSale", method = RequestMethod.POST)
 	public String saveSale(@RequestParam(value = "saleList") String saleList, HttpSession httpssion) {
-		/*Salesman operator = (Salesman) httpssion.getAttribute("loginOperator"); 
+		Salesman operator = (Salesman) httpssion.getAttribute("loginOperator"); 
 
-        ;
-		Salesman salesman = salemanDao.getSalesman(operator.getId());*/
+        
+		Salesman salesman = salemanDao.getSalesman(operator.getId());
 		
-		Salesman salesman = salemanDao.getSalesman(15L);
+		//Salesman salesman = salemanDao.getSalesman(15L);
 		 List<Inventory> inventoryList;
 		try {
 			inventoryList = getInvertoryListFromStr(saleList);
-			for (Inventory inventory : inventoryList) {
-				System.out.println(inventory.getQuantity());
-				saleDao.saveTranjection(inventory.getQuantity(), inventory.getSku(), salesman,inventory.getTax());
-			}
+			saleDao.saveTranjection(inventoryList,salesman);
+			/*for (Inventory inventory : inventoryList) {
+				System.out.println(inventory.getQuantity());*/
+				
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -38,7 +38,7 @@ public class Salesman {
 	private String password;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "salesman", fetch = FetchType.LAZY)
-	List<Sale> salesList = new ArrayList<>();
+	List<Sale> salesList;
 	
 	
 
@@ -98,5 +98,7 @@ public class Salesman {
 	public void setSalesList(List<Sale> salesList) {
 		this.salesList = salesList;
 	}
+
+	
 
 }

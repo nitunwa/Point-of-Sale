@@ -20,11 +20,12 @@ import com.sale.app.dao.SaleDao;
 import com.sale.app.dao.SalesmanDao;
 import com.sale.app.models.Inventory;
 import com.sale.app.models.Sale;
+import com.sale.app.models.SaleDetails;
 import com.sale.app.models.Salesman;
 
 @Controller
 @RequestMapping("/sale")
-public class SaleController {
+public class SaleDetailsController {
 	@Autowired
 	private SaleDao saleDao;
 
@@ -39,16 +40,15 @@ public class SaleController {
 	
 	@RequestMapping(value = "/addsale", method = RequestMethod.POST)
 	public ResponseEntity<?> addsale(@RequestBody List<Inventory> inventoryList, HttpSession httpssion) {
+		System.out.println("inventory list:"+inventoryList.toString());
+		
 		Salesman operator = (Salesman) httpssion.getAttribute("loginOperator");
-
-		Salesman salesman = salemanDao.getSalesman(operator.getId());
-		//Salesman salesman = salemanDao.getSalesman(15L);
-
-		for (Inventory inventory : inventoryList) {
-			System.out.println(inventory.getQuantity());
-			saleDao.saveTranjection(inventory.getQuantity(), inventory.getSku(), salesman,inventory.getTax());
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
+		
+		System.out.println("operator: "+operator.getId());
+		
+		Sale sale= saleDao.saveTranjection(inventoryList,operator);
+		
+		return new ResponseEntity<>(sale,HttpStatus.OK);
 	}
 
 }

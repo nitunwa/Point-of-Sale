@@ -41,7 +41,7 @@ public class Inventory {
 	private double tax;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inventory", fetch = FetchType.LAZY)
-	private List<Sale> salesList;
+	private List<SaleDetails> salesList;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplier_Id")
@@ -125,11 +125,11 @@ public class Inventory {
 		this.tax = tax;
 	}
 
-	public List<Sale> getSalesList() {
+	public List<SaleDetails> getSalesList() {
 		return salesList;
 	}
 
-	public void setSalesList(List<Sale> salesList) {
+	public void setSalesList(List<SaleDetails> salesList) {
 		this.salesList = salesList;
 	}
 
