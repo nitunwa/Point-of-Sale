@@ -100,7 +100,8 @@ function addTax(){
 							dataMap[sku] = {
 											"quantity" : quantity,
 											 "sku" : sku,
-											 "tax" : tax
+											 "tax" : tax,
+											 "price":unitPrice
 											}
 												var markup = "<tr><td><input type='checkbox' name='record'></td><td>"
 														+ sku + "</td><td>"
@@ -155,7 +156,7 @@ function addTax(){
 					              $('#totalPriceId').val("");
 					              $("#saleListTableId tbody").empty();
 					              
-					              //window.location="http://localhost:8070/sale/showrecipt?saleId="+data.saleId;
+					              window.location="http://localhost:8070/sale/reciept/showReciept?saleId="+data.saleId;
 					            },
 					            error: function(status){
 					            	alert("fail")

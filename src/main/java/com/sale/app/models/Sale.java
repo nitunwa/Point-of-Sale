@@ -24,6 +24,16 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "saleId")
 public class Sale {
 
+	public Sale(Long saleId) {
+		super();
+		this.saleId = saleId;
+	}
+	public Sale() {
+		super();
+		
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long saleId;

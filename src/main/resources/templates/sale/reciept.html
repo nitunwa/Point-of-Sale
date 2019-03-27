@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>Theme Template for Bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+
+
+<!-- Bootstrap theme -->
+
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet"
+	media="screen" />
+
+<!-- Custom styles for this template -->
+
+
+<link th:href="@{/css/theme.css}" rel="stylesheet" media="screen" />
+
+</head>
+
+<body>
+
+	<!-- Fixed navbar -->
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header"></div>
+			<div id="navbar" class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav navbar-right">
+
+
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<!-- <div class="container">
+
+		<form th:action="@{/reciept/showReciept}" method="post"
+			autocomplete="off">
+			<div class="form-group"> -->
+			<!--receipt print start  -->
+			
+			<div id="invoice-POS">
+
+		<div style="text-align: center" id="top">
+			<!-- <center id="top"> -->
+			<div class="logo"></div>
+			<div class="info">
+				<h2>SBISTechs Inc</h2>
+			</div>
+			<!--End Info-->
+		<!-- </div> -->
+		<!--  </center> -->
+		<!--End InvoiceTop-->
+
+		<div id="mid">
+			<div class="info">
+				<h2>Contact Info</h2>
+				<p>
+					Address : street city, state 0000<br> Email :
+					JohnDoe@gmail.com<br> Phone : 555-555-5555<br>
+				</p>
+			</div>
+		</div>
+		</div>
+		<!--End Invoice Mid-->
+
+		<div style="text-align: center" id="bot">
+		
+		<!-- ################################### -->
+		<!-- <div class="row" >
+
+			<div class="col-md-12 col-md-offset-3">
+
+				<div class="form-group col-md-6">
+					<div class="table table-bordered">
+						<table class="table table-striped">
+							<thead>
+								 
+								
+								<tr class="tabletitle">
+						<td class="item"><h2>Item</h2></td>
+								<td class="Hours"><h2>Qty</h2></td>
+								<td class="Rate"><h2>Sub Total</h2></td>
+					</tr>
+								
+							</thead>
+							<tbody>
+							
+							  
+								<tr th:each="sd,iterationStatus  : ${sale.salesList}">
+									 <td th:text="${sd.inventory.product.productName}">Name</td>
+									<td th:text="${sd.quantity}">quantity</td> 
+									<td th:text="${sd.price}">Price</td> 
+ 
+									<td><a th:href="@{/inventory/delectInventoryById(id=${inventory.id})}">Delete</a>
+									</td>
+								</tr>
+								
+											
+								<tr class="tabletitle">
+									<td></td>
+									<td class="Rate"><h2>tax</h2></td>
+									<td class="payment"><h2>$419.25</h2></td>
+								</tr>
+			
+								<tr class="tabletitle">
+									<td></td>
+									<td class="Rate"><h2>Total</h2></td>
+									<td class="payment"><h2>$3,644.25</h2></td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+					<a class="btn  btn-default" th:href="" >Back</a>
+				</div>
+			</div>
+		</div> -->
+	<!-- 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+			<div id="table" style="text-align: center">
+				<table>
+					<tr class="tabletitle">
+						<td class="item"><h2>Item</h2></td>
+						<td class="Hours"><h2>Qty</h2></td>
+						<td class="Rate"><h2>Sub Total1111</h2></td>
+					</tr>
+
+					
+					<tr class="service"  th:each="sd,iterationStatus  : ${sale.salesList}">
+						<td class="tableitem"><p class="itemtext" th:text="${sd.inventory.product.productName}">Animation</p></td>
+						<td class="tableitem"><p class="itemtext" th:text="${sd.quantity}">20</p></td>
+						<td class="tableitem"><p class="itemtext "  th:text="${sd.price}">$1500.00</p></td>
+					</tr>
+
+					 
+
+                           
+                         
+
+					<tr class="tabletitle">
+						<td></td>
+						<td class="Rate"><h2>tax</h2></td>
+						<!-- <td class="payment"><h2  th:text="${sale.tax}">$419.25</h2></td> -->
+					</tr>
+
+					<tr class="tabletitle">
+						<td></td>
+						<td class="Rate"><h2>Total</h2></td>
+						<td class="payment"><h2 th:text="${sale.total}">$3,644.25</h2></td>
+					</tr>
+
+				</table>
+			</div>
+			<!--End Table-->
+
+			<div id="legalcopy">
+				<p class="legal">
+					<strong>Thank you for your business!</strong>  Payment is expected
+					within 31 days; please process this invoice within that time. There
+					will be a 5% interest charge per month on late invoices.
+				</p>
+			</div>
+
+		</div>
+		<!--End InvoiceBot-->
+	</div>
+	<!--End Invoice-->
+			
+			
+			<!--receipt print end  -->
+			<!-- </div>
+		</form>
+	</div>
+ -->
+
+
+
+	<!-- /container -->
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<script src="../static/js/bootstrap.min.js"
+		th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -8,4 +8,5 @@ import com.sale.app.models.Salesman;
 
 public interface SaleDao {
 public Sale saveTranjection(List<Inventory> inventoryList, Salesman salesman );
+public Sale getSale(Sale sale);
 }

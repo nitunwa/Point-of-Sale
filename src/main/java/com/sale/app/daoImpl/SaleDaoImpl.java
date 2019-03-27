@@ -35,7 +35,7 @@ public class SaleDaoImpl implements SaleDao {
 		return sum;
 	}
 
-	private List<Inventory> getInventoryListDao(List<Inventory> inventoryList) {
+	/*private List<Inventory> getInventoryListDao(List<Inventory> inventoryList) {
 		System.out.println("SaleDaoImpl.getInventoryListDao() statrt");
 		List<String> skuList = new ArrayList<String>();
 		for (Inventory inventory : inventoryList) {
@@ -47,6 +47,13 @@ public class SaleDaoImpl implements SaleDao {
 				.getResultList();
 		System.out.println("SaleDaoImpl.getInventoryListDao() end");
 		return itemList;
+	}*/
+	public Inventory getInventory(Inventory inventory) {
+		
+			Inventory item= entityManager.createQuery("from Inventory where sku= :sku", Inventory.class)
+					.setParameter("sku", inventory.getSku()).getSingleResult();
+			return item;
+	
 	}
 
 	@Override
@@ -54,21 +61,24 @@ public class SaleDaoImpl implements SaleDao {
 		System.out.println("SaleDaoImpl.saveTranjection() start");
 		
 		Salesman operator = entityManager.find(Salesman.class, salesman.getId());
-		List<Inventory> inventoryListDao = getInventoryListDao(inventoryList);
+	//	List<Inventory> inventoryListDao = getInventoryListDao(inventoryList);
 		Sale sale = new Sale();
 		sale.setSalesman(operator);
-		sale.setTotal(getGrandTotal(inventoryListDao));
+		sale.setTotal(getGrandTotal(inventoryList));
 		entityManager.persist(sale);
 
 		SaleDetails salesDetails = new SaleDetails();
-
-		for (Inventory inventory : inventoryListDao) {
-                double totalAmount = inventory.getQuantity() * inventory.getPrice();
+		Inventory item = new Inventory();
+		for (Inventory inventory : inventoryList) {
+			double tax= inventory.getTax();
+                double totalAmount = inventory.getQuantity() * inventory.getPrice()+ tax;
 				salesDetails.setCurrentDate(new Date());
 				salesDetails.setQuantity(inventory.getQuantity());
-				salesDetails.setInventory(inventory);
+				item = getInventory( inventory);
+				salesDetails.setInventory(item);
 				salesDetails.setTax(inventory.getTax());
 				salesDetails.setTotal(totalAmount);
+				salesDetails.setSale(sale);
 		
 		entityManager.persist(salesDetails);
 		
@@ -76,5 +86,13 @@ public class SaleDaoImpl implements SaleDao {
 	}
 		System.out.println("SaleDaoImpl.saveTranjection() end");
 		return sale;
+	}
+	
+	public Sale getSale(Sale sale) {
+		
+		Sale obj = entityManager.find(Sale.class,sale.getSaleId());
+		obj.getSalesList();
+		obj.getSalesman();
+		return obj;
 	}
 }
