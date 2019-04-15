@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.sale.app.dao.SalesmanDao;
 import com.sale.app.models.Salesman;
 
-@Repository
-@Transactional
+@Repository   // database layer && job is to catch persistence specific exceptions 
+@Transactional //JPA Transaction Management &&  PersistenceContext
 public class SalesmanDaoImpl implements SalesmanDao {
 
-	@PersistenceContext
+	@PersistenceContext //injecting entityManager
 	private EntityManager entityManager;
 
 	@Override

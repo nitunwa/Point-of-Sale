@@ -27,7 +27,7 @@ public class SaleDaoImpl implements SaleDao {
 		System.out.println("SaleDaoImpl.getGrandTotal() start");
 		double sum = 0;
 		for (Inventory inventory : inventoryList) {
-			
+
 			double totalAmount = inventory.getQuantity() * inventory.getPrice();
 			sum = sum + totalAmount;
 		}
@@ -35,62 +35,54 @@ public class SaleDaoImpl implements SaleDao {
 		return sum;
 	}
 
-	/*private List<Inventory> getInventoryListDao(List<Inventory> inventoryList) {
-		System.out.println("SaleDaoImpl.getInventoryListDao() statrt");
-		List<String> skuList = new ArrayList<String>();
-		for (Inventory inventory : inventoryList) {
-			skuList.add(inventory.getSku());
-		}
-		String str = "from Inventory as t where t.sku IN :skus";
-		
-		List<Inventory> itemList = entityManager.createQuery(str,Inventory.class ).setParameter("skus",skuList)
-				.getResultList();
-		System.out.println("SaleDaoImpl.getInventoryListDao() end");
-		return itemList;
-	}*/
-	public Inventory getInventory(Inventory inventory) {
-		
-			Inventory item= entityManager.createQuery("from Inventory where sku= :sku", Inventory.class)
-					.setParameter("sku", inventory.getSku()).getSingleResult();
-			return item;
 	
+	public Inventory getInventory(Inventory inventory) {
+
+		Inventory item = entityManager.createQuery("from Inventory where sku= :sku", Inventory.class)
+				.setParameter("sku", inventory.getSku()).getSingleResult();
+		return item;
+
 	}
 
 	@Override
 	public Sale saveTranjection(List<Inventory> inventoryList, Salesman salesman) {
 		System.out.println("SaleDaoImpl.saveTranjection() start");
-		
+
 		Salesman operator = entityManager.find(Salesman.class, salesman.getId());
-	//	List<Inventory> inventoryListDao = getInventoryListDao(inventoryList);
+
 		Sale sale = new Sale();
 		sale.setSalesman(operator);
-		sale.setTotal(getGrandTotal(inventoryList));
+		double subTotal = getGrandTotal(inventoryList);
+		double tax = subTotal * .1;
+		double total = subTotal + tax;
+		sale.setSubtTotal(subTotal);
+		sale.setTax(tax);
+		sale.setTotal(total);
 		entityManager.persist(sale);
 
 		SaleDetails salesDetails = new SaleDetails();
 		Inventory item = new Inventory();
 		for (Inventory inventory : inventoryList) {
-			double tax= inventory.getTax();
-                double totalAmount = inventory.getQuantity() * inventory.getPrice()+ tax;
-				salesDetails.setCurrentDate(new Date());
-				salesDetails.setQuantity(inventory.getQuantity());
-				item = getInventory( inventory);
-				salesDetails.setInventory(item);
-				salesDetails.setTax(inventory.getTax());
-				salesDetails.setTotal(totalAmount);
-				salesDetails.setSale(sale);
-		
-		entityManager.persist(salesDetails);
-		
 
-	}
+			double totalAmount = inventory.getQuantity() * inventory.getPrice() + tax;
+			salesDetails.setCurrentDate(new Date());
+			salesDetails.setQuantity(inventory.getQuantity());
+			item = getInventory(inventory);
+			salesDetails.setInventory(item);
+
+			salesDetails.setTotal(totalAmount);
+			salesDetails.setSale(sale); 
+
+			entityManager.persist(salesDetails);
+
+		}
 		System.out.println("SaleDaoImpl.saveTranjection() end");
 		return sale;
 	}
-	
+
 	public Sale getSale(Sale sale) {
-		
-		Sale obj = entityManager.find(Sale.class,sale.getSaleId());
+
+		Sale obj = entityManager.find(Sale.class, sale.getSaleId());
 		obj.getSalesList();
 		obj.getSalesman();
 		return obj;

@@ -33,18 +33,14 @@ public class SaleDetails {
 
 	@NotNull
 	private Date currentDate = new Date();
-	
-	@NotNull
-	private double tax;
-	
+
 	@NotNull
 	private double total;
 
-	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "inventory_Id")
 	private Inventory inventory;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "sale_Id")
 	private Sale sale;
@@ -52,31 +48,21 @@ public class SaleDetails {
 	public SaleDetails() {
 	}
 
-	
-
 	public Long getId() {
 		return id;
 	}
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
 	public Sale getSale() {
 		return sale;
 	}
 
-
-
 	public void setSale(Sale sale) {
 		this.sale = sale;
 	}
-
-
 
 	public int getQuantity() {
 		return quantity;
@@ -102,22 +88,12 @@ public class SaleDetails {
 		this.currentDate = currentDate;
 	}
 
-	
-
 	public Inventory getInventory() {
 		return inventory;
 	}
 
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
-	}
-
-	public double getTax() {
-		return tax;
-	}
-
-	public void setTax(double tax) {
-		this.tax = tax;
 	}
 
 	public double getTotal() {

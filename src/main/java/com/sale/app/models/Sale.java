@@ -44,8 +44,11 @@ public class Sale {
 	
 	private Long customerId;
 	
-	@NotNull
+	
+	private double tax;
+	
 	private double total;
+	private double subtTotal;
 	
 	
 	private String credit_card;
@@ -80,7 +83,14 @@ public class Sale {
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
+	
 
+	public double getSubtTotal() {
+		return subtTotal;
+	}
+	public void setSubtTotal(double subtTotal) {
+		this.subtTotal = subtTotal;
+	}
 	public String getCredit_card() {
 		return credit_card;
 	}
@@ -88,7 +98,15 @@ public class Sale {
 	public void setCredit_card(String credit_card) {
 		this.credit_card = credit_card;
 	}
+	
+	
 
+	public double getTax() {
+		return tax;
+	}
+	public void setTax(double tax) {
+		this.tax = tax;
+	}
 	public Salesman getSalesman() {
 		return salesman;
 	}
